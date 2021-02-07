@@ -306,6 +306,7 @@ export function maybeRedirectToWelcomePage(options: Object = {}) {
             // before navigating to close page
             window.sessionStorage.setItem('guest', !jwt);
             window.sessionStorage.setItem('jwt', jwt);
+            window.localStorage.setItem('jwt', jwt);
 
             let path = 'close.html';
 

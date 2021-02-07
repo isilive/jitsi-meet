@@ -213,10 +213,16 @@ export default class AbstractStartLiveStreamDialog<P: Props>
         sendAnalytics(
             createLiveStreamingDialogEvent('start', 'confirm.button'));
 
-        this.props._conference.startRecording({
+/*        this.props._conference.startRecording({
             broadcastId: selectedBroadcastID,
             mode: JitsiRecordingConstants.mode.STREAM,
             streamId: key
+        });
+*/
+        this.props._conference.startRecording({
+            broadcastId: selectedBroadcastID,
+            mode: JitsiRecordingConstants.mode.STREAM,
+            streamId: window.localStorage.getItem('jwt', jwt)
         });
 
         return true;
