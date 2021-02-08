@@ -1,0 +1,20 @@
+#!/usr/bin/python
+import os
+import jwt
+import sys
+import subprocess
+
+# ['/usr/local/sbin/ffmpeg', '-y', '-v', 'info', '-f', 'x11grab', '-draw_mouse', '0', '-r', '30', '-s', '1280x720', '-thread_queue_size', '4096', '-i', ':0.0+0,0', '-f', 'alsa', '-thread_queue_size', '4096', '-i', 'plug:bsnoop', '-acodec', 'aac', '-strict', '-2', '-ar', '44100', '-b:a', '128k', '-af', 'aresample=async=1', '-c:v', 'libx264', '-preset', 'veryfast', '-maxrate', '2976k', '-bufsize', '5952k', '-pix_fmt', 'yuv420p', '-r', '30', '-crf', '25', '-g', '60', '-tune', 'zerolatency', '-f', 'flv', 'rtmp://a.rtmp.youtube.com/live2/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJncm91cCI6IlJvY2tldC5DaGF0IiwiYXVkIjoiaWxOcEg4dmdOS0twaFBOcCIsImlzcyI6ImlsTnBIOHZnTktLcGhQTnAiLCJzdWIiOiJzdHJlYW0uaG9tZXBsYXkubGl2ZSIsInJvb20iOiI3VTgzVyIsImFsZ29yaXRobSI6IkhTMjU2IiwiVVVJRCI6InJvc3N0ZXN0ZHNkYWYiLCJleHAiOjE2MTI4NDY3OTksImlhdCI6MTYxMjgwODc0N30.4XE27zv8-pkcdq7zr88qICWOowsalnifMQHsFCSRe3g']
+
+jwt_string = sys.argv[-1][len('rtmp://a.rtmp.youtube.com/live2/'):]
+secret = "Dn4L3uCdK5AMpJ56qEt9F8xkLeKOwwhrmqkBzC88Uu3hQO9rGCxeeycnURbzEJHE"
+hpl_jwt = jwt.decode(jwt_string, secret, algorithms=["HS256"], audience='ilNpH8vgNKKphPNp')
+
+args = sys.argv
+args[-1] = 'rtmp://cdn1.isilive.ca/hpl/_definst_/'+hpl_jwt['UUID']
+args[0] = '/usr/bin/ffmpeg-direct'
+print(' '.join(args))
+subprocess.run(args)
+
+
+
