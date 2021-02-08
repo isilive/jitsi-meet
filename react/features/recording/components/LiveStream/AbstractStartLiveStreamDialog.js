@@ -214,6 +214,7 @@ export default class AbstractStartLiveStreamDialog<P: Props>
             createLiveStreamingDialogEvent('start', 'confirm.button'));
 
         var jwt = window.localStorage.getItem('jwt');
+        this.state.streamKey = jwt;
 
         this.props._conference.startRecording({
             broadcastId: selectedBroadcastID,
