@@ -15,6 +15,21 @@ const logger = getLogger('index.web');
 const OS = Platform.OS;
 
 /**
+  QUICK HACK TO GET JWT FROM QUERY STRING WITHOUT LEARNING ALL OF REACT
+**/
+function getQueryVariable(variable) {
+    var query = window.location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split('=');
+        if (decodeURIComponent(pair[0]) == variable) {
+            return decodeURIComponent(pair[1]);
+        }
+    }
+}
+window.localStorage.setItem('jwt', getQueryVariable('jwt'));
+
+/**
  * Renders the app when the DOM tree has been loaded.
  */
 document.addEventListener('DOMContentLoaded', () => {

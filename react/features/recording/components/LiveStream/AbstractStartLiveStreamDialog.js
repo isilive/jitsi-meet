@@ -194,13 +194,13 @@ export default class AbstractStartLiveStreamDialog<P: Props>
      */
     _onSubmit() {
         const { broadcasts, selectedBoundStreamID } = this.state;
-        const key
+/*        const key
             = (this.state.streamKey || this.props._streamKey || '').trim();
 
         if (!key) {
             return false;
         }
-
+*/
         let selectedBroadcastID = null;
 
         if (selectedBoundStreamID) {
@@ -213,16 +213,12 @@ export default class AbstractStartLiveStreamDialog<P: Props>
         sendAnalytics(
             createLiveStreamingDialogEvent('start', 'confirm.button'));
 
-/*        this.props._conference.startRecording({
-            broadcastId: selectedBroadcastID,
-            mode: JitsiRecordingConstants.mode.STREAM,
-            streamId: key
-        });
-*/
+        var jwt = window.localStorage.getItem('jwt');
+
         this.props._conference.startRecording({
             broadcastId: selectedBroadcastID,
             mode: JitsiRecordingConstants.mode.STREAM,
-            streamId: window.localStorage.getItem('jwt', jwt)
+            streamId: jwt
         });
 
         return true;

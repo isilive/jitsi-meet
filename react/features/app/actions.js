@@ -299,9 +299,19 @@ export function maybeRedirectToWelcomePage(options: Object = {}) {
             }
 
             const { jwt } = getState()['features/base/jwt'];
-
+            window.localStorage.setItem('jwt', 'ABCDFGHI123');
             let hashParam;
-
+  
+/*
+            alert(jwt);
+            if ( jwt == null ){
+              if (typeof window.localStorage.getItem('jwt', jwt) != 'undefined'){
+                jwt = window.localStorage.getItem('jwt', jwt)
+              }
+            }
+            alert.log(jwt)
+            window.localStorage.setItem('jwt', jwt);
+*/
             // save whether current user is guest or not, and pass auth token,
             // before navigating to close page
             window.sessionStorage.setItem('guest', !jwt);
