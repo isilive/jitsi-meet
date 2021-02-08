@@ -11,7 +11,7 @@ secret = "Dn4L3uCdK5AMpJ56qEt9F8xkLeKOwwhrmqkBzC88Uu3hQO9rGCxeeycnURbzEJHE"
 hpl_jwt = jwt.decode(jwt_string, secret, algorithms=["HS256"], audience='ilNpH8vgNKKphPNp')
 
 args = sys.argv
-args[-1] = 'rtmp://cdn1.isilive.ca/hpl/_definst_/'+hpl_jwt['UUID']
+args[-1] = 'rtmp://cdn1.isilive.ca/hpl/_definst_/hpl/'+hpl_jwt['UUID']
 args[0] = '/usr/bin/ffmpeg-direct'
 print(' '.join(args))
 subprocess.run(args)
